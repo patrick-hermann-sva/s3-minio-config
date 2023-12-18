@@ -53,7 +53,11 @@ variable "buckets" {
 minio_server   = "artifacts.app.4sthings.tiab.ssc.sva.de:443"
 buckets = [
   {
-    name = "cloud4"
+    name = "data"
+    acl  = "public"
+  },
+  {
+    name = "backup"
     acl  = "public"
   }
 ]
