@@ -3,6 +3,78 @@ terraform module for base-setup configuration of minio s3
 
 ## EXAMPLE USAGE
 
+<details><summary>CALL MODULE</summary>
+
+```hcl
+# main.tf
+module "s3-minio-config" {
+  source         = "github.com/stuttgart-things/s3-minio-config"
+  minio_user     = var.minio_user
+  minio_server   = var.minio_server
+  minio_password = var.minio_password
+  minio_region   = var.minio_region
+  minio_ssl      = true
+  buckets        = var.buckets
+}
+
+variable "minio_region" {
+  description = "Default MINIO region"
+  default     = "eu-central-1"
+}
+
+variable "minio_server" {
+  description = "Default MINIO host and port"
+}
+
+variable "minio_user" {
+  description = "MINIO user"
+}
+
+variable "minio_password" {
+  description = "MINIO password"
+}
+
+variable "buckets" {
+  type = list(object({
+    name = string
+    acl  = string
+  }))
+  default     = []
+  description = "A list of buckets"
+}
+```
+
+</details>
+
+<details><summary>EXAMPLE TFVARS</summary>
+
+```hcl
+# terraform.tfvars
+minio_server   = "artifacts.app.4sthings.tiab.ssc.sva.de:443"
+buckets = [
+  {
+    name = "cloud4"
+    acl  = "public"
+  }
+]
+
+```
+</details>
+
+<details><summary>EXECUTE TERRAFORM</summary>
+
+```bash
+export TF_VAR_minio_user="<ACCESS-ID>"
+export TF_VAR_minio_password="<SECRET-ACCESS-ID>"
+
+terraform init
+terraform validate
+terraform plan
+terraform apply
+```
+
+</details>
+
 ## Author Information
 
 ```bash
