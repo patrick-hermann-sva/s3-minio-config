@@ -1,4 +1,5 @@
 # stuttgart-things/s3-minio-config
+
 terraform module for base-setup configuration of minio s3
 
 ## EXAMPLE USAGE
@@ -8,7 +9,7 @@ terraform module for base-setup configuration of minio s3
 ```hcl
 # main.tf
 module "s3-minio-config" {
-  source         = "github.com/stuttgart-things/s3-minio-config"
+  source         = "github.com/stuttgart-things/s3-minio-config" # OR LOCAL E.G. "../s3-minio-config"
   minio_user     = var.minio_user
   minio_server   = var.minio_server
   minio_password = var.minio_password
@@ -78,6 +79,22 @@ terraform apply
 ```
 
 </details>
+
+## DEV
+
+<details><summary>TASKS</summary>
+
+```bash
+task: Available tasks for this project:
+
+* branch:       Create branch from main
+* commit:       Commit + push code into branch
+* pr:           Create pull request into main
+```
+
+</details>
+
+
 
 ## Author Information
 
