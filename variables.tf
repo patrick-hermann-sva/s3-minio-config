@@ -33,3 +33,5 @@ variable "buckets" {
   default     = []
   description = "A list of bucket"
 }
+
+# ADD VAR FOR USERS
