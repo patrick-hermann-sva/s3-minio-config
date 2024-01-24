@@ -34,4 +34,10 @@ variable "buckets" {
   description = "A list of bucket"
 }
 
-# ADD VAR FOR USERS
+variable "users" {
+  type = list(object({
+    name = string
+  }))
+  default = []
+  description = "A list of new users"
+}
