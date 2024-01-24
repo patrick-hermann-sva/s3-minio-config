@@ -43,6 +43,14 @@ variable "buckets" {
   default     = []
   description = "A list of buckets"
 }
+
+variable "users" {
+  type = list(object({
+    name = string
+  }))
+  default = []
+  description = "A list of new users"
+}
 ```
 
 </details>
@@ -62,6 +70,45 @@ buckets = [
     acl  = "public"
   }
 ]
+
+users = [
+  {
+    name = "Max.Mustermann"
+  },
+  {
+    name = "Maria.Musterfrau"
+  }
+]
+
+```
+</details>
+
+<details><summary>EXAMPLE OUTPUT</summary>
+
+```hcl
+#output.tf
+
+# Bucket Output
+output "minio_id" {
+  value = module.s3-minio-config.minio_id
+}
+
+output "minio_url" {
+  value = module.s3-minio-config.minio_url
+}
+
+# User Output
+output "user_minio_user" {
+  value = module.s3-minio-config.user_minio_user
+}
+
+output "minio_user_status" {
+  value = module.s3-minio-config.minio_user_status
+}
+
+output "minio_user_secret" {
+  value = module.s3-minio-config.minio_user_secret
+}
 
 ```
 </details>
