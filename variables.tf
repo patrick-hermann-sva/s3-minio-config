@@ -37,6 +37,7 @@ variable "buckets" {
 variable "users" {
   type = list(object({
     name = string
+    secret = string
   }))
   default = []
   description = "A list of new users"
