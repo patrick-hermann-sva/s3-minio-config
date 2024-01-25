@@ -48,6 +48,7 @@ variable "users" {
   type = list(object({
     name = string
     secret = string
+    policy = string
   }))
   default = []
   description = "A list of new users"
@@ -76,10 +77,12 @@ users = [
   {
     name = "Max.Mustermann"
     secret = null               # Randomly generated secret key
+    policy = null               # No policy is attatched
   },
   {
     name = "Maria.Musterfrau"
     secret = "password"
+    policy = "readwrite"
   }
 ]
 
