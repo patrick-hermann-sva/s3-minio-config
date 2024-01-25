@@ -47,6 +47,7 @@ variable "buckets" {
 variable "users" {
   type = list(object({
     name = string
+    secret = string
   }))
   default = []
   description = "A list of new users"
@@ -74,9 +75,11 @@ buckets = [
 users = [
   {
     name = "Max.Mustermann"
+    secret = null               # Randomly generated secret key
   },
   {
     name = "Maria.Musterfrau"
+    secret = "password"
   }
 ]
 

@@ -5,4 +5,5 @@ resource "minio_iam_user" "minio_user" {
   }
 
   name = each.value["name"]
+  secret = each.value["secret"]
 }
