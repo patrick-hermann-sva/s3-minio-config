@@ -118,7 +118,84 @@ output "minio_user_secret" {
 }
 
 ```
+
 </details>
+
+<details><summary>EXAMPLE #1: JUST CREATE USERS</summary>
+
+```hcl
+# CALL MODULE - main.tf
+module "s3-minio-config" {
+  source         = "github.com/stuttgart-things/s3-minio-config" # OR LOCAL E.G. "../s3-minio-config"
+  minio_user     = var.minio_user
+  minio_server   = var.minio_server
+  minio_password = var.minio_password
+  minio_region   = var.minio_region
+  minio_ssl      = true
+  users          = var.users
+}
+
+variable "minio_region" {
+  description = "Default MINIO region"
+  default     = "eu-central-1"
+}
+
+variable "minio_server" {
+  description = "Default MINIO host and port"
+}
+
+variable "minio_user" {
+  description = "MINIO user"
+}
+
+variable "minio_password" {
+  description = "MINIO password"
+}
+
+variable "users" {
+  type = list(object({
+    name = string
+    secret = string
+    policy = string
+  }))
+  default = []
+  description = "A list of new users"
+}
+
+output "user_minio_user" {
+    value = module.s3-minio-config.user_minio_user
+}
+
+output "minio_user_secret" {
+    value = module.s3-minio-config.minio_user_secret
+}
+
+output "minio_user_status" {
+    value = module.s3-minio-config.minio_user_status
+}
+```
+
+```hcl
+# VARIABLES -tfvars
+minio_server   = "artifacts.app.4sthings.tiab.ssc.sva.de:443"
+users = [
+  {
+    name = "patrick"
+    secret = null               # Randomly generated secret key
+    policy = null               # No policy is attatched
+  },
+  {
+    name = "hermann"
+    secret = "thepassword"
+    policy = "readwrite"
+  }
+]
+minio_user = "<USER>"
+minio_password = "<PASSWORD>"
+```
+
+</details>
+
 
 <details><summary>EXECUTE TERRAFORM</summary>
 
