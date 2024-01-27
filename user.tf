@@ -9,7 +9,7 @@ resource "minio_iam_user" "minio_user" {
 }
 
 
-resource "minio_iam_user_policy_attachment" "developer" {
+resource "minio_iam_user_policy_attachment" "policy" {
 
   for_each = {
     for mount in var.users :
