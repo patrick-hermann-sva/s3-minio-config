@@ -16,6 +16,7 @@ module "s3-minio-config" {
   minio_region   = var.minio_region
   minio_ssl      = true
   buckets        = var.buckets
+  users          = var.users
 }
 
 variable "minio_region" {
