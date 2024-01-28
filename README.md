@@ -121,7 +121,7 @@ output "minio_user_secret" {
 
 </details>
 
-<details><summary>EXAMPLE #1: JUST CREATE USERS</summary>
+<details><summary>EXAMPLE-USECASE #1: CREATE USERS ONLY</summary>
 
 ```hcl
 # CALL MODULE - main.tf
@@ -224,8 +224,6 @@ task: Available tasks for this project:
 ```
 
 </details>
-
-
 
 ## Author Information
 
