@@ -88,6 +88,7 @@ users = [
 ]
 
 ```
+
 </details>
 
 <details><summary>EXAMPLE OUTPUT</summary>
