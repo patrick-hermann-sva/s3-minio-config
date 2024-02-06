@@ -25,6 +25,10 @@ variable "minio_password" {
   type        = string
 }
 
+#####################################
+### Variables for bucket creation ###
+#####################################
+
 variable "buckets" {
   type = list(object({
     name = string
@@ -33,6 +37,10 @@ variable "buckets" {
   default     = []
   description = "A list of bucket"
 }
+
+###################################
+### Variables for user creation ###
+###################################
 
 variable "users" {
   type = list(object({
@@ -43,3 +51,71 @@ variable "users" {
   default = []
   description = "A list of new users"
 }
+
+#####################################
+### Variables for policy creation ###
+#####################################
+
+variable "new_policy" {
+  type = list(object({
+    name = string
+    policy = string
+  }))
+  description = "Policy for creation"
+  default = []
+}
+
+##########################################
+### Variables for minio k8s deployment ###
+##########################################
+
+variable "enableMinioDeployment" {
+  type    = bool
+  default = false
+}
+
+variable "kube_config" {
+  type    = string
+  default = "~/.kube/config"
+}
+
+variable "namespace" {
+  type    = string
+  default = ""
+}
+
+variable "deployment_name" {
+  type    = string
+  default = ""
+}
+
+variable "helmStorageEnabled" {
+  type    = bool
+  default = true
+}
+
+variable "storageClass" {
+  type    = string
+  default = ""
+}
+
+variable "ingress_hostname_api" {
+  type    = string
+  default = ""
+}
+
+variable "ingress_hostname_console" {
+  type    = string
+  default = ""
+}
+
+variable "ingress_domain" {
+  type    = string
+  default = ""
+}
+
+variable "cluster_issuer" {
+  type    = string
+  default = ""
+}
+
