@@ -6,6 +6,16 @@ terraform {
       source  = "aminueza/minio"
       version = ">= 2.0.1"
     }
+
+    helm = {
+      source = "hashicorp/helm"
+      version = ">=2.12.1"
+    }
+
+    kubernetes = {
+      source = "hashicorp/kubernetes"
+      version = ">=2.25.2"
+    }
   }
 }
 
@@ -18,7 +28,6 @@ provider "minio" {
 }
 
 provider "helm" {
-  # Several Kubernetes authentication methods are possible: https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs#authentication
   kubernetes {
     config_path = pathexpand(var.kube_config)
   }
