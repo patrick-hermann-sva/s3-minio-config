@@ -36,12 +36,6 @@ variable "minio_password" {
 }
 
 variable "users" {
-  type = list(object({
-    name = string
-    secret = string
-    policy = string
-  }))
-  default = []
   description = "A list of new users"
 }
 
@@ -113,11 +107,6 @@ variable "minio_password" {
 }
 
 variable "buckets" {
-  type = list(object({
-    name = string
-    acl  = string
-  }))
-  default     = []
   description = "A list of buckets"
 }
 
@@ -158,7 +147,6 @@ module "s3-minio-config" {
 
 variable "minio_region" {
   description = "Default MINIO region"
-  default     = "eu-central-1"
 }
 
 variable "minio_server" {
@@ -174,12 +162,7 @@ variable "minio_password" {
 }
 
 variable "new_policy" {
-  type = list(object({
-    name = string
-    policy = string
-  }))
   description = "Policy for creation"
-  default = []
 }
 
 ```
@@ -254,48 +237,39 @@ variable "minio_password" {
 }
 
 variable "enableMinioDeployment" {      
-  type    = bool
-  default = false 
+  description = "Boolean to enable minio deployment" 
 }
 
 variable "namespace" {
-  type    = string
-  default = "minio"
+  description = "K8s and helm namespace for deployment"
 }
 
 variable "deployment_name" {
-  type    = string
-  default = "minio-deployment"
+  description = "Name for deployment in K8s"
 }
 
 variable "helmStorageEnabled" {
-  type    = bool
-  default = true
+  description = "Boolean to enable storage"
 }
 
 variable "storageClass" {
-  type    = string
-  default = ""
+  description = "Class for helm storage"
 }
 
 variable "ingress_hostname_api" {
-  type    = string
-  default = "artifacts"
+  description = "Ingress hostname for API"
 }
 
 variable "ingress_hostname_console" {
-  type    = string
-  default = "artifacts-console"
+  description = "Ingress hostname for console"
 }
 
 variable "ingress_domain" {
-  type    = string
-  default = "app.4sthings.tiab.ssc.sva.de"
+  description = "Ingress domain"
 }
 
 variable "cluster_issuer" {
-  type    = string
-  default = "cluster-issuer-approle"
+  description = "Cluster issuer"
 }
 
 
