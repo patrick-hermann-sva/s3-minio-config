@@ -18,7 +18,6 @@ resource "helm_release" "minio" {
       INGRESS_HOSTNAME_CONSOLE = var.ingress_hostname_console
       INGRESS_DOMAIN           = var.ingress_domain
       INGRESS_CLASS            = var.ingress_class
-      CLUSTER_ISSUER           = var.cluster_issuer
       MINIO_ADMIN_USER         = var.minio_user
       MINIO_ADMIN_PASSWORD     = var.minio_password
     })
