@@ -218,79 +218,27 @@ storage_class = ""
 
 </details>
 
-<details><summary>DEPLOYMENT SERVER</summary>
+<details><summary>DEPLOYMENT SERVER-INSTANCE</summary>
 
 ```hcl
 # CALL MODULE - main.tf
 module "s3-minio-config" {
-  source                    = "github.com/stuttgart-things/s3-minio-config"
-  minio_user                = var.minio_user
-  minio_server              = var.minio_server
-  minio_password            = var.minio_password
-  minio_region              = var.minio_region
-  minio_ssl                 = true
-  enable_deployment     = var.enable_deployment
-  namespace                 = var.namespace
-  deployment_name           = var.deployment_name
-  ingress_hostname_api      = var.ingress_hostname_api
-  ingress_domain            = var.ingress_domain
-  cluster_issuer            = var.cluster_issuer
-  ingress_hostname_console  = var.ingress_hostname_console
-  enable_storage        = var.enable_storage
-  storage_class              = var.storage_class
-}
-
-variable "minio_region" {
-  description = "Default MINIO region"
-  default     = "eu-central-1"
-}
-
-variable "minio_server" {
-  description = "Default MINIO host and port"
-}
-
-variable "minio_user" {
-  description = "MINIO user"
-}
-
-variable "minio_password" {
-  description = "MINIO password"
-}
-
-variable "enable_deployment" {
-  description = "Boolean to enable minio deployment"
-}
-
-variable "namespace" {
-  description = "K8s and helm namespace for deployment"
-}
-
-variable "deployment_name" {
-  description = "Name for deployment in K8s"
-}
-
-variable "enable_storage" {
-  description = "Boolean to enable storage"
-}
-
-variable "storage_class" {
-  description = "Class for helm storage"
-}
-
-variable "ingress_hostname_api" {
-  description = "Ingress hostname for API"
-}
-
-variable "ingress_hostname_console" {
-  description = "Ingress hostname for console"
-}
-
-variable "ingress_domain" {
-  description = "Ingress domain"
-}
-
-variable "cluster_issuer" {
-  description = "Cluster issuer"
+  source                   = "github.com/stuttgart-things/s3-minio-config"
+  enable_deployment        = true
+  kube_config              = "/home/sthings/.kube/labda-dev7"
+  namespace                = "minio"
+  minio_region             = "eu-central-1"
+  minio_ssl                = true
+  minio_image_tag          = "13.3.3"
+  enable_storage           = true
+  helm_chart_version       = "13.3.3"
+  ingress_hostname_api     = "artifacts"
+  ingress_hostname_console = "artifacts-console"
+  ingress_domain           = "dev7.4sthings.tiab.ssc.sva.de"
+  cluster_issuer           = "cluster-issuer-approle"
+  minio_user               = "admin"
+  minio_password           = "superSecret"
+  ingress_class            = "nginx"
 }
 ```
 
