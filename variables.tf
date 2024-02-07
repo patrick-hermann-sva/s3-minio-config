@@ -13,6 +13,7 @@ variable "minio_ssl" {
 variable "minio_server" {
   description = "Default MINIO host and port"
   type        = string
+  default     = false
 }
 
 variable "minio_user" {
@@ -26,7 +27,7 @@ variable "minio_password" {
 }
 
 #####################################
-### Variables for bucket creation ###
+### VARIABLES FOR BUCKET CREATION ###
 #####################################
 
 variable "buckets" {
@@ -39,39 +40,79 @@ variable "buckets" {
 }
 
 ###################################
-### Variables for user creation ###
+### VARIABLES FOR USER CREATION ###
 ###################################
 
 variable "users" {
   type = list(object({
-    name = string
+    name   = string
     secret = string
     policy = string
   }))
-  default = []
+  default     = []
   description = "A list of new users"
 }
 
 #####################################
-### Variables for policy creation ###
+### VARIABLES FOR POLICY CREATION ###
 #####################################
 
 variable "new_policy" {
   type = list(object({
-    name = string
+    name   = string
     policy = string
   }))
   description = "Policy for creation"
-  default = []
+  default     = []
 }
 
 ##########################################
-### Variables for minio k8s deployment ###
+### VARIABLES FOR MINIO K8S DEPLOYMENT ###
 ##########################################
 
-variable "enableMinioDeployment" {
+variable "ingress_class" {
+  type    = string
+  default = "nginx"
+}
+
+variable "enable_tls" {
+  type    = bool
+  default = true
+}
+
+variable "enable_deployment" {
   type    = bool
   default = false
+}
+
+variable "minio_image_repository" {
+  type    = string
+  default = "stuttgart-things/sthings-minio"
+}
+
+variable "minio_image_tag" {
+  type    = string
+  default = "13.3.3"
+}
+
+variable "minio_image_registry" {
+  type    = string
+  default = "eu.gcr.io"
+}
+
+variable "helm_chart" {
+  type    = string
+  default = "minio"
+}
+
+variable "helm_chart_version" {
+  type    = string
+  default = "13.3.3"
+}
+
+variable "helm_repository" {
+  type    = string
+  default = "https://charts.bitnami.com/bitnami"
 }
 
 variable "kube_config" {
@@ -79,43 +120,47 @@ variable "kube_config" {
   default = "~/.kube/config"
 }
 
-variable "namespace" {
-  type    = string
-  default = ""
-}
-
-variable "deployment_name" {
-  type    = string
-  default = ""
-}
-
-variable "helmStorageEnabled" {
+variable "create_namespace" {
   type    = bool
   default = true
 }
 
-variable "storageClass" {
+variable "namespace" {
   type    = string
-  default = ""
+  default = "minio"
+}
+
+variable "helm_release_name" {
+  type    = string
+  default = "minio"
+}
+
+variable "enable_storage" {
+  type    = bool
+  default = true
+}
+
+variable "storage_class" {
+  type    = string
+  default = false
 }
 
 variable "ingress_hostname_api" {
   type    = string
-  default = ""
+  default = false
 }
 
 variable "ingress_hostname_console" {
   type    = string
-  default = ""
+  default = false
 }
 
 variable "ingress_domain" {
   type    = string
-  default = ""
+  default = false
 }
 
 variable "cluster_issuer" {
   type    = string
-  default = ""
+  default = false
 }
-

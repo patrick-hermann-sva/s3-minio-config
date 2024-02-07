@@ -1,7 +1,7 @@
 image:
-  registry: eu.gcr.io
-  repository: stuttgart-things/sthings-minio
-  tag: 13.3.3
+  registry: ${MINIO_IMAGE_REGISTRY}
+  repository: ${MINIO_IMAGE_REPOSITORY}
+  tag: ${MINIO_IMAGE_TAG}
 
 networkPolicy:
   enabled: true
@@ -13,7 +13,7 @@ auth:
 
 ingress:
   enabled: true
-  ingressClassName: nginx
+  ingressClassName: ${INGRESS_CLASS}
   tls: true
   extraTls:
     - hosts:
@@ -23,8 +23,8 @@ ingress:
 
 apiIngress:
   enabled: true
-  ingressClassName: "nginx"
-  tls: true
+  ingressClassName: ${INGRESS_CLASS}
+  tls: ${ENABLE_TLS}
   extraTls:
     - hosts:
         - ${INGRESS_HOSTNAME_API}.${INGRESS_DOMAIN}
@@ -32,8 +32,8 @@ apiIngress:
   hostname: ${INGRESS_HOSTNAME_API}.${INGRESS_DOMAIN}
 
 persistence:
-  enabled: ${helmStorageEnabled}
-  storageClass: ${storageClass}
+  enabled: ${ENABLE_STORAGE}
+  storage_class: ${STORAGE_CLASS}
 
 extraEnvVars:
   - name: MINIO_SERVER_URL
