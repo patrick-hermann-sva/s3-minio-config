@@ -235,7 +235,6 @@ module "s3-minio-config" {
   ingress_hostname_api     = "artifacts"
   ingress_hostname_console = "artifacts-console"
   ingress_domain           = "dev7.4sthings.tiab.ssc.sva.de"
-  cluster_issuer           = "cluster-issuer-approle"
   minio_user               = "admin"
   minio_password           = "superSecret"
   ingress_class            = "nginx"
