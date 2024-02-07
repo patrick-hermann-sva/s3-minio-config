@@ -1,10 +1,10 @@
 # stuttgart-things/s3-minio-config
 
-terraform module for base-setup configuration of minio s3
+terraform module for setting up and configure a minio s3 server instance.
 
-## EXAMPLE USAGE
+## EXAMPLE MODULE USAGE
 
-<details><summary>EXAMPLE-USECASE #1: CREATE USERS ONLY</summary>
+<details><summary>CREATE USERS</summary>
 
 ```hcl
 # CALL MODULE - main.tf
@@ -53,6 +53,7 @@ output "minio_user_status" {
 
 ```
 
+
 ```hcl
 # VARIABLES -tfvars
 minio_server   = "artifacts.app.4sthings.tiab.ssc.sva.de:443"
@@ -75,7 +76,7 @@ minio_password = "<PASSWORD>"
 
 </details>
 
-<details><summary>EXAMPLE-USECASE #2: CREATE BUCKETS ONLY</summary>
+<details><summary>CREATE BUCKETS</summary>
 
 ```hcl
 # CALL MODULE - main.tf
@@ -131,7 +132,7 @@ minio_password = "<PASSWORD>"
 
 </details>
 
-<details><summary>EXAMPLE-USECASE #3: CREATE POLICY ONLY</summary>
+<details><summary>CREATE POLICIES</summary>
 
 ```hcl
 # CALL MODULE - main.tf
@@ -195,28 +196,48 @@ minio_user = "<USER>"
 minio_password = "<PASSWORD>"
 ```
 
+```hcl
+# VARIABLES -tfvars
+minio_server   = "artifacts.app.4sthings.tiab.ssc.sva.de:443"
+minio_user = "<USER>"
+minio_password = "<PASSWORD>"
+
+enableMinioDeployment = true
+
+namespace = "minio"
+deployment_name = "minio-deployment"
+
+ingress_hostname_api = "artifacts"
+ingress_hostname_console = "artifacts-console"
+ingress_domain = "app.4sthings.tiab.ssc.sva.de"
+cluster_issuer = "cluster-issuer-approle"
+
+helmStorageEnabled = true
+storageClass = ""
+```
+
 </details>
 
-<details><summary>EXAMPLE-USECASE #4: DEPLOY MINIO IN K8S</summary>
+<details><summary>DEPLOYMENT SERVER</summary>
 
 ```hcl
 # CALL MODULE - main.tf
 module "s3-minio-config" {
-  source         = "github.com/stuttgart-things/s3-minio-config"
-  minio_user     = var.minio_user
-  minio_server   = var.minio_server
-  minio_password = var.minio_password
-  minio_region   = var.minio_region
-  minio_ssl      = true
-  enableMinioDeployment = var.enableMinioDeployment
-  namespace             = var.namespace
-  deployment_name       = var.deployment_name
-  ingress_hostname_api  = var.ingress_hostname_api
-  ingress_domain        = var.ingress_domain
-  cluster_issuer        = var.cluster_issuer
-  ingress_hostname_console = var.ingress_hostname_console
-  helmStorageEnabled    = var.helmStorageEnabled
-  storageClass          = var.storageClass
+  source                    = "github.com/stuttgart-things/s3-minio-config"
+  minio_user                = var.minio_user
+  minio_server              = var.minio_server
+  minio_password            = var.minio_password
+  minio_region              = var.minio_region
+  minio_ssl                 = true
+  enableMinioDeployment     = var.enableMinioDeployment
+  namespace                 = var.namespace
+  deployment_name           = var.deployment_name
+  ingress_hostname_api      = var.ingress_hostname_api
+  ingress_domain            = var.ingress_domain
+  cluster_issuer            = var.cluster_issuer
+  ingress_hostname_console  = var.ingress_hostname_console
+  helmStorageEnabled        = var.helmStorageEnabled
+  storageClass              = var.storageClass
 }
 
 variable "minio_region" {
@@ -236,8 +257,8 @@ variable "minio_password" {
   description = "MINIO password"
 }
 
-variable "enableMinioDeployment" {      
-  description = "Boolean to enable minio deployment" 
+variable "enableMinioDeployment" {
+  description = "Boolean to enable minio deployment"
 }
 
 variable "namespace" {
@@ -271,31 +292,11 @@ variable "ingress_domain" {
 variable "cluster_issuer" {
   description = "Cluster issuer"
 }
-
-
-```
-
-```hcl
-# VARIABLES -tfvars
-minio_server   = "artifacts.app.4sthings.tiab.ssc.sva.de:443"
-minio_user = "<USER>"
-minio_password = "<PASSWORD>"
-
-enableMinioDeployment = true
-
-namespace = "minio"
-deployment_name = "minio-deployment"
-
-ingress_hostname_api = "artifacts"
-ingress_hostname_console = "artifacts-console"
-ingress_domain = "app.4sthings.tiab.ssc.sva.de"
-cluster_issuer = "cluster-issuer-approle"
-
-helmStorageEnabled = true
-storageClass = ""
 ```
 
 </details>
+
+## EXECUTION
 
 <details><summary>EXECUTE TERRAFORM</summary>
 
@@ -328,6 +329,7 @@ task: Available tasks for this project:
 ## Author Information
 
 ```bash
+Ana Calva, stuttgart-things 01/2024
 Patrick Hermann, stuttgart-things 12/2023
 ```
 
