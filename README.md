@@ -202,7 +202,7 @@ minio_server   = "artifacts.app.4sthings.tiab.ssc.sva.de:443"
 minio_user = "<USER>"
 minio_password = "<PASSWORD>"
 
-enableMinioDeployment = true
+enable_deployment = true
 
 namespace = "minio"
 deployment_name = "minio-deployment"
@@ -212,8 +212,8 @@ ingress_hostname_console = "artifacts-console"
 ingress_domain = "app.4sthings.tiab.ssc.sva.de"
 cluster_issuer = "cluster-issuer-approle"
 
-helmStorageEnabled = true
-storageClass = ""
+enable_storage = true
+storage_class = ""
 ```
 
 </details>
@@ -229,15 +229,15 @@ module "s3-minio-config" {
   minio_password            = var.minio_password
   minio_region              = var.minio_region
   minio_ssl                 = true
-  enableMinioDeployment     = var.enableMinioDeployment
+  enable_deployment     = var.enable_deployment
   namespace                 = var.namespace
   deployment_name           = var.deployment_name
   ingress_hostname_api      = var.ingress_hostname_api
   ingress_domain            = var.ingress_domain
   cluster_issuer            = var.cluster_issuer
   ingress_hostname_console  = var.ingress_hostname_console
-  helmStorageEnabled        = var.helmStorageEnabled
-  storageClass              = var.storageClass
+  enable_storage        = var.enable_storage
+  storage_class              = var.storage_class
 }
 
 variable "minio_region" {
@@ -257,7 +257,7 @@ variable "minio_password" {
   description = "MINIO password"
 }
 
-variable "enableMinioDeployment" {
+variable "enable_deployment" {
   description = "Boolean to enable minio deployment"
 }
 
@@ -269,11 +269,11 @@ variable "deployment_name" {
   description = "Name for deployment in K8s"
 }
 
-variable "helmStorageEnabled" {
+variable "enable_storage" {
   description = "Boolean to enable storage"
 }
 
-variable "storageClass" {
+variable "storage_class" {
   description = "Class for helm storage"
 }
 
