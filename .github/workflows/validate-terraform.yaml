@@ -5,7 +5,7 @@ on:
     branches:
       - main
       - feature/*
-      - fix/*
+      - review/*
   pull_request:
     types: [opened, reopened]
 
