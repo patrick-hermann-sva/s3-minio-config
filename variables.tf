@@ -159,8 +159,3 @@ variable "ingress_domain" {
   type    = string
   default = false
 }
-
-variable "cluster_issuer" {
-  type    = string
-  default = false
-}
