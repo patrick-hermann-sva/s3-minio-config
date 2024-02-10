@@ -159,3 +159,17 @@ variable "ingress_domain" {
   type    = string
   default = false
 }
+
+#########################################
+### EXTRA VARIABLES FOR CERT CREATION ###
+#########################################
+
+variable "create_cert" {
+  type    = bool
+  default = false
+}
+
+variable "cluster_issuer" {
+  type    = string
+  default = ""
+}

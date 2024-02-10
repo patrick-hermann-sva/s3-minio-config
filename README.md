@@ -241,6 +241,18 @@ module "s3-minio-config" {
 }
 ```
 
+To create api and console certificates for the deployment include the following variables:
+
+```hcl
+# CALL MODULE - main.tf
+module "s3-minio-config" {
+...
+cluster_issuer = "cluster-issuer-approle"
+create_cert = true
+...
+}
+```
+
 </details>
 
 ## EXECUTION
