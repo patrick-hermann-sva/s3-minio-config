@@ -238,6 +238,7 @@ module "s3-minio-config" {
   minio_user               = "admin"
   minio_password           = "superSecret"
   ingress_class            = "nginx"
+  create_cert              = true
 }
 ```
 
