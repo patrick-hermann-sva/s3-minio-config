@@ -1,5 +1,5 @@
 data "kubectl_path_documents" "certs" {
-    pattern = "${path.module}/templates/*.yaml"
+    pattern = "${path.module}/templates/*.yaml.tpl"
     vars = {
         INGRESS_HOSTNAME = format("%s,%s",var.ingress_hostname_api,var.ingress_hostname_console)
         INGRESS_DOMAIN = var.ingress_domain
