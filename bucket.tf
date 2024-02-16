@@ -7,5 +7,6 @@ resource "minio_s3_bucket" "buckets" {
 
   bucket = each.value["name"]
   acl    = each.value["acl"]
-
+  
+  depends_on = [helm_release.minio]
 }

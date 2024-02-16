@@ -6,6 +6,9 @@ resource "minio_iam_user" "minio_user" {
 
   name   = each.value["name"]
   secret = each.value["secret"]
+
+  depends_on = [helm_release.minio, minio_iam_policy.new_policy]
+
 }
 
 
@@ -19,5 +22,5 @@ resource "minio_iam_user_policy_attachment" "policy_attachment" {
   user_name   = each.value["name"]
   policy_name = each.value["policy"]
 
-  depends_on = [minio_iam_user.minio_user]
+  depends_on = [minio_iam_user.minio_user, minio_iam_policy.new_policy]
 }

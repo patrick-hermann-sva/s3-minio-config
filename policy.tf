@@ -7,4 +7,5 @@ resource "minio_iam_policy" "new_policy" {
   name   = each.value["name"]
   policy = each.value["policy"]
 
+  depends_on = [helm_release.minio]
 }
