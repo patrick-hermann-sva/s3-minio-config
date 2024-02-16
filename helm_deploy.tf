@@ -22,5 +22,5 @@ resource "helm_release" "minio" {
       MINIO_ADMIN_PASSWORD     = var.minio_password
     })
   ]
-
+  depends_on = [kubectl_manifest.cert_manifest]
 }

@@ -255,6 +255,108 @@ create_cert = true
 
 </details>
 
+<details><summary>CREATE MULTIPLE-RESOURCES (USER + BUCKETS + POLICY WITHIN DEPLOYMENT SERVER-INSTANCE)</summary>
+
+```hcl
+# CALL MODULE - main.tf
+# main.tf
+module "s3-minio-config" {
+  source         = "github.com/stuttgart-things/s3-minio-config"
+  minio_user     = "admin"
+  minio_password = "superSecret"
+  minio_server   = "artifacts.dev11.4sthings.tiab.ssc.sva.de"
+  minio_region   = "eu-central-1"
+  minio_ssl      = true
+
+  ############
+  ## TFVARS ##
+  ############
+  users          = var.users
+  buckets        = var.buckets
+  new_policy     = var.new_policy
+
+  ################
+  ## Deploy K8s ##
+  ################
+  enable_deployment        = true
+  namespace                = "minio"
+  minio_image_tag          = "13.3.3"
+  enable_storage           = true
+  helm_chart_version       = "13.3.3"
+  ingress_hostname_api     = "artifacts"
+  ingress_hostname_console = "artifacts-console"
+  ingress_domain           = "dev11.4sthings.tiab.ssc.sva.de"
+  ingress_class            = "nginx"
+  create_cert              = true
+  cluster_issuer           = "cluster-issuer-approle"
+}
+
+
+variable "users" {
+  description = "A list of new users"
+}
+
+variable "buckets" {
+  description = "A list of buckets"
+}
+
+variable "new_policy" {
+  description = "Policy for creation"
+}
+
+```
+
+```hcl
+# VARIABLES -tfvars
+users = [
+  {
+    name = "patrick"
+    secret = null               # Randomly generated secret key
+    policy = null               # No policy is attatched
+  },
+  {
+    name = "hermann"
+    secret = "thepassword"
+    policy = "test_policy"
+  }
+]
+
+buckets = [
+  {
+    name = "data"
+    acl  = "public"
+  },
+  {
+    name = "backup"
+    acl  = "public"
+  }
+]
+
+new_policy = [
+    {
+        name = "test_policy"
+        policy = <<EOF
+{
+    "Version": "2012-10-17",
+    "Statement": [
+       {
+          "Effect": "Allow",
+          "Action": [
+             "s3:ListAllMyBuckets"
+          ],
+          "Resource": [
+             "arn:aws:s3:::*"
+          ]
+       }
+    ]
+ }
+        EOF
+    },
+]
+```
+
+</details>
+
 ## EXECUTION
 
 <details><summary>EXECUTE TERRAFORM</summary>
