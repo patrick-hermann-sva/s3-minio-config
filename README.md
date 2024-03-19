@@ -170,7 +170,7 @@ variable "new_policy" {
 
 ```hcl
 # VARIABLES -tfvars
-minio_server   = "artifacts.app.4sthings.tiab.ssc.sva.de:443"
+minio_server   = "<MINIO_SERVER>"
 new_policy = [
     {
         name = "test_policy_1"
