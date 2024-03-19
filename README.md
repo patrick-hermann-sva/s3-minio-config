@@ -1,6 +1,6 @@
 # stuttgart-things/s3-minio-config
 
-terraform module for setting up and configure a minio s3 server instance.
+Terraform module for setting up and configure a minio s3 server instance.
 
 ## EXAMPLE MODULE USAGE
 
